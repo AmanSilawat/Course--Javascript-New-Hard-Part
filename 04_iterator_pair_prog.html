@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Iterator Pair Programing</title>
+</head>
+<body>
+<script>
+
+// Type JavaScript here and click "Run Code" or press Ctrl + s
+console.log('Hello, world!');
+
+// CHALLENGE 1
+
+//a. [solved] ----------
+function sumFunc(arr) {
+  let sum = 0;
+  for(let i=0; i<arr.length; i++){
+  	sum += arr[i];
+	}
+  return sum;
+}
+
+
+// Uncomment the lines below to test your work
+const array = [1, 2, 3, 4];
+
+// console.log(sumFunc(array)); // -> should log 10
+
+//b. [solved]  --------
+function returnIterator(arr) {
+  let i = 0;
+  return function inner() {
+    let ele = arr[i++];
+    return ele;
+  }
+}
+
+// Uncomment the lines below to test your work
+const array2 = ['a', 'b', 'c', 'd'];
+const myIterator = returnIterator(array2);
+// console.log(myIterator()); // -> should log 'a'
+// console.log(myIterator()); // -> should log 'b'
+// console.log(myIterator()); // -> should log 'c'
+// console.log(myIterator()); // -> should log 'd'
+
+
+
+// CHALLENGE 2 [not solved]
+
+function nextIterator(arr) {
+  let i = 0;
+  let obj = {
+    next : function () {
+      return arr[i++];
+    }
+  }
+  return obj;
+}
+
+// Uncomment the lines below to test your work
+const array3 = [1, 2, 3];
+const iteratorWithNext = nextIterator(array3);
+// console.log(iteratorWithNext.next()); // -> should log 1
+// console.log(iteratorWithNext.next()); // -> should log 2
+// console.log(iteratorWithNext.next()); // -> should log 3
+
+
+
+// CHALLENGE 3  [not solved]
+
+function sumArray(arr) {
+  // YOUR CODE HERE
+  // use your nextIterator function
+  let accumulator = 0;
+  let iterator = nextIterator(arr);
+  let next = iterator.next();
+	while(next) {
+    accumulator += next;
+    next = iterator.next();
+  }
+  return accumulator;
+}
+
+// Uncomment the lines below to test your work
+const array4 = [1, 2, 3, 4];
+// console.log(sumArray(array4)); // -> should log 10
+
+
+
+// CHALLENGE1 4 [not soved]
+
+function setIterator(set) {
+  // YOUR CODE HERE
+	let setIterator = set.values();
+  let iterator = {
+    next: function() {
+      var next = setIterator.next();
+      return next["value"];
+    }
+  }
+  return iterator;
+}
+
+// Uncomment the lines below to test your work
+const mySet = new Set('hey');
+const iterateSet = setIterator(mySet);
+// console.log(iterateSet.next()); // -> should log 'h'
+// console.log(iterateSet.next()); // -> should log 'e'
+// console.log(iterateSet.next()); // -> should log 'y'
+
+
+
+// CHALLENGE 5 [4:25 min]
+
+function indexIterator(arr) {
+  // YOUR CODE HERE
+  let i = 0;
+	let obj = {
+    next: function() {
+      return [i, arr[i++]];
+    }
+  }
+  return obj;
+}
+
+
+// original code ----
+// function indexIterator(arr) {
+//   // YOUR CODE HERE
+// 	let index = 0;
+//   const iterator = {
+//     next: function () {
+//       const value = arr[index];
+//       index++;
+//       return [index - 1, value];
+//     }
+//   }
+//   return iterator;
+// }
+
+// Uncomment the lines below to test your work
+const array5 = ['a', 'b', 'c', 'd'];
+const iteratorWithIndex = indexIterator(array5);
+// console.log(iteratorWithIndex.next()); // -> should log [0, 'a']
+// console.log(iteratorWithIndex.next()); // -> should log [1, 'b']
+// console.log(iteratorWithIndex.next()); // -> should log [2, 'c']
+
+
+
+// CHALLENGE 6
+
+function Words(string) {
+  this.str = string;
+}
+
+Words.prototype[Symbol.iterator] = function() {
+  // YOUR CODE HERE
+  let index = 0;
+  const splitStr = this.str.split(/\s/);
+	return {
+    next: function () {
+      if (index < splitStr.length) {
+        const value = splitStr[index];
+        index ++;
+        return {value: value, done: false};
+      } else {
+        return { done: true };
+      }
+    }
+  }
+
+}
+
+// Uncomment the lines below to test your work
+const helloWorld = new Words('Hello World');
+// for (let word of helloWorld) { console.log(word); } // -> should log 'Hello' and 'World'
+
+// const helloWorld = new Words('Hello World');
+// for (let word of helloWorld) { console.log('Challenge 6', word); } // -> should log 'Hello' and 'World'
+
+// CHALLENGE 7
+
+function valueAndPrevIndex(array){
+	let index = 0;
+	return {
+    sentence: function() {
+      index++;
+      let indexName = index;
+      if (index - 1 === 0) {
+        indexName = "first";
+      }
+      return "" + array[index - 1] + " was found after index " + indexName;
+    }
+  }
+}
+
+const returnedSentence = valueAndPrevIndex([4,5,6])
+// console.log(returnedSentence.sentence()); // '4 was found after index first'
+// console.log(returnedSentence.sentence()); // '5 was found after index 2'
+// console.log(returnedSentence.sentence()); // '6 was found after index 3'
+
+
+//CHALLENGE 8
+
+function* createConversation(string) {
+	setInterval( (string) => console.log("hello there : english") , 3000 );
+
+}
+
+console.log(createConversation('english').next());
+
+
+
+//CHALLENGE 9
+function waitForVerb(noun) {
+
+}
+
+async function f(noun) {
+
+}
+
+f("dog");
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>js</title>
+</head>
+<body>
+
+<script>
+
+function iterator(array) {
+	let i = 0;
+	return function innerFun() {
+		const element = array[i]
+		i++;
+		return element;
+	}
+}
+
+const newIterator = iterator([4, 5, 6]);
+console.log( newIterator() ); // 4
+console.log( newIterator() ); // 5
+console.log( newIterator() ); // 6
+console.log( newIterator() ); // undefined
+console.log( newIterator() ); // undefined
+
+</script>
+
+</body>
+</html>

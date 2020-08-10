@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>await</title>
+</head>
+<body>
+<script>
+
+async function createFlow() {
+	console.log("Me Fisrt");
+	const data = await fetch('https://twitter.com/will/tweets/1');
+	console.log(data);
+}
+
+createFlow();
+console.log("Me second")
+
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>js</title>
+</head>
+<body>
+
+<script>
+
+//1.
+function display(data) {
+	console.log(data);
+}
+
+const futureData = fetch("https://twitter.com/will/tweets/1");
+futureData.then(display);
+console.log("me first");
+
+/* console result
+
+me first
+hi
+
+*/
+
+
+
+//2.
+function display(data) {console.log(data);}
+function printHello() {console.log("Hello");}
+function blockFor300ms() {/* block for 300ms */}
+
+setTimeout(printHello, 0);
+
+const futureData = fetch('https://twitter.com/will/tweets/1');
+futureData.then(display);
+
+blockFor300ms();
+
+console.log("me first!");
+
+/* console result
+
+me first
+hi
+Hello
+
+*/
+
+</script>
+
+</body>
+</html>
